@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Snake game</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <div id="container">
+    <h2 id="score">Score: 0</h2>
+    <div class="board" :style="boardStyle">
+      <div class="snake-head" :style="snakeHeadStyle"></div>
+      <div class="snake-food" :style="snakeFoodStyle"></div>
+    </div>
+    <div class="cover">
+      <div class="message-box">
+        <h1 class="message">Oops! You lost</h1>
+        <input type="text" name="name" id="name" placeholder="Enter your name">
+        <button class="menu">Main menu</button>
+        <button class="again">Play Again</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
