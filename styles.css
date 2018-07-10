@@ -14,24 +14,26 @@ body, html {
 }
 
 .board {
-  position: relative;
   background-color: lightgoldenrodyellow;
+  margin: 30px;
   margin-top: 0;
-  flex-grow: 1;
+  height: 100%;
+  display: grid;
 }
 
 .snake-block {
   background-color: green;
-  position: absolute;
+  grid-area: block;
 }
 
 .snake-head {
-  background: blue;
+  background-color: blue;
+  grid-area: head;
 }
 
 .snake-food {
-  background: red;
-  position: absolute;
+  background-color: red;
+  grid-area: food;
 }
 
 #score {
