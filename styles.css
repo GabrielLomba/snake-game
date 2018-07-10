@@ -14,10 +14,11 @@ body, html {
 }
 
 .board {
-  position: relative;
   background-color: lightgoldenrodyellow;
+  margin: 30px;
   margin-top: 0;
-  flex-grow: 1;
+  height: 100%;
+  display: grid;
 }
 
 .snake-block {
@@ -25,6 +26,7 @@ body, html {
   position: absolute;
   height: 3%;
   width: 3%;
+  grid-area: block;
 }
 
 .snake-head {
@@ -32,6 +34,7 @@ body, html {
   width: 3%;
   height: 3%;
   position: absolute;
+  grid-area: head;
 }
 
 .snake-food {
@@ -39,6 +42,7 @@ body, html {
   position: absolute;
   height: 3%;
   width: 3%;
+  grid-area: food;
 }
 
 #score {
