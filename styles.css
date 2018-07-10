@@ -23,15 +23,22 @@ body, html {
 .snake-block {
   background-color: green;
   position: absolute;
+  height: 3%;
+  width: 3%;
 }
 
 .snake-head {
   background: blue;
+  width: 3%;
+  height: 3%;
+  position: absolute;
 }
 
 .snake-food {
   background: red;
   position: absolute;
+  height: 3%;
+  width: 3%;
 }
 
 #score {
@@ -48,6 +55,9 @@ body, html {
   left: 0;
   background: #00000066;
   display: none;
+}
+#beginning-modal{
+  display: block;
 }
 
 .message-box{
@@ -89,6 +99,7 @@ body, html {
 .menu{
   background: rgb(157, 34, 27);
   color: white;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
@@ -101,5 +112,5 @@ body, html {
   .message-box{
       width: 95%;
       padding: 0;
-  } 
+  }
 }
