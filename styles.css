@@ -59,11 +59,12 @@ body, html {
   left: 0;
   background: #00000066;
 }
+
 #beginning-modal{
   display: block;
 }
 
-.message-box{
+.play-again-box{
   position: relative;
   top: 25%;
   width: 50vw;
@@ -80,6 +81,7 @@ body, html {
   padding: 1em;
   border-radius: 3%;
   box-sizing: border-box;
+  display: none;
 }
 
 .message{
@@ -99,26 +101,36 @@ body, html {
   color: rgb(0, 0, 0);
 }
 
-.menu{
+.highest-scores{
   background: rgb(157, 34, 27);
   color: white;
   cursor: pointer;
 }
 
-@media screen and (max-width: 1000px) {
-  .message-box{
-      width: 60%;
-  }
+.highest-scores-box {
+  position: relative;
+  top: 25%;
+  width: 50vw;
+  height: 50vh;
+  background: #d5d5d5;
+  margin: 0 auto;
+  grid-template-areas:  ". title ."
+                        "entries entries entries"
+                        "again again again";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 4fr 2fr;
+  text-align: center;
+  padding: 1em;
+  border-radius: 3%;
+  box-sizing: border-box;
+  display: none;
 }
 
-@media screen and (max-width: 600px) {
-  .message-box{
-      width: 95%;
-      padding: 0;
-  }
+.score-entries {
+  grid-area: entries;
 }
 
-.highest-scores {
+.start-box{
   position: relative;
   top: 25%;
   width: 50vw;
@@ -126,16 +138,43 @@ body, html {
   background: #d5d5d5;
   margin: 0 auto;
   display: grid;
-  grid-template-areas:    "entries entries entries"
-                          ". again .";
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 4fr 1fr;
+  grid-template-areas:    "title title"
+                          "start start";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   text-align: center;
   padding: 1em;
   border-radius: 3%;
   box-sizing: border-box;
 }
 
-.score-entries {
-  grid-area: entries;
+.title {
+  grid-area: title;
+}
+
+.start {
+  grid-area: start;
+  background-color: rgb(27, 157, 42);
+}
+
+@media screen and (max-width: 1000px) {
+  .play-again-box{
+      width: 60%;
+  }
+
+  .highest-scores-box{
+      width: 60%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .play-again-box{
+      width: 95%;
+      padding: 0;
+  }
+
+  .highest-scores-box{
+      width: 95%;
+      padding: 0;
+  }
 }
