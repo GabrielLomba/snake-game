@@ -13,7 +13,7 @@
     <h2 id="score">Score: 0</h2>
     <div class="board">
       <div class="snake-head"></div>
-      <div class="snake-food"></div>
+      <div class="snake-food" id="food"></div>
     </div>
     <div class="cover">
       <div class="message-box">
@@ -27,7 +27,16 @@
         <button class="again">Play Again</button>
       </div>
     </div>
+    <div class="cover" id="beginning-modal">
+      <div class="message-box">
+        <h1 class="message">Snake 1.0</h1>
+        <button class="menu" id="startGameBtn">Play Game</button>
+        <button class="again">High Scores</button>
+      </div>
+    </div>
   </div>
+  <script src="game.js"></script>
+  <script src="board.js"></script>
   <script src="score.js"></script>
 </body>
 </html>
