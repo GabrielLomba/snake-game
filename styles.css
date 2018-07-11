@@ -5,7 +5,7 @@ body, html {
 }
 
 #container {
-  background-color: lightpink;
+  background-color: rgb(24, 24, 24);
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -14,7 +14,7 @@ body, html {
 }
 
 .board {
-  background-color: lightgoldenrodyellow;
+  background-color: rgb(222, 222, 222);
   margin: 30px;
   margin-top: 0;
   height: 100%;
@@ -30,7 +30,7 @@ body, html {
 }
 
 .snake-head {
-  background: blue;
+  background: rgb(15, 176, 12);
   width: 3%;
   height: 3%;
   position: absolute;
@@ -49,6 +49,10 @@ body, html {
   text-align: end;
   margin-right: 20px;
   margin: 5px 20px 5px 0;
+  color: #999;
+}
+#points{
+  color: red;
 }
 
 .cover{
