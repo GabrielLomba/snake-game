@@ -58,7 +58,6 @@ body, html {
   top: 0;
   left: 0;
   background: #00000066;
-  display: none;
 }
 #beginning-modal{
   display: block;
@@ -74,7 +73,7 @@ body, html {
   display: grid;
   grid-template-areas:    "msg msg"
                           "name name"
-                          "btn1 btn2";
+                          "again btn2";
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 3fr 1fr 1fr;
   text-align: center;
@@ -95,7 +94,7 @@ body, html {
 }
 
 .again{
-  /* margin: 5%; */
+  grid-area: again;
   background: rgb(27, 157, 42);
   color: rgb(0, 0, 0);
 }
@@ -117,4 +116,26 @@ body, html {
       width: 95%;
       padding: 0;
   }
+}
+
+.highest-scores {
+  position: relative;
+  top: 25%;
+  width: 50vw;
+  height: 50vh;
+  background: #d5d5d5;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas:    "entries entries entries"
+                          ". again .";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 4fr 1fr;
+  text-align: center;
+  padding: 1em;
+  border-radius: 3%;
+  box-sizing: border-box;
+}
+
+.score-entries {
+  grid-area: entries;
 }
