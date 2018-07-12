@@ -10,7 +10,8 @@ body, html {
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
+  align-items: center;
 }
 
 .board {
@@ -19,37 +20,42 @@ body, html {
   margin-top: 0;
   height: 100%;
   display: grid;
+  position: relative;
 }
 
 .snake-block {
   background-color: green;
   position: absolute;
-  height: 3%;
-  width: 3%;
+  height: 30px;
+  width: 30px;
   grid-area: block;
 }
 
 .snake-head {
   background: rgb(15, 176, 12);
-  width: 3%;
-  height: 3%;
+  width: 30px;
+  height: 30px;
   position: absolute;
   grid-area: head;
+  display: none;
 }
 
 .snake-food {
   background: red;
   position: absolute;
-  height: 3%;
-  width: 3%;
+  height: 30px;
+  width: 30px;
   grid-area: food;
+  display: none;
 }
 
 #score {
   text-align: end;
   margin-right: 20px;
-  margin: 5px 20px 5px 0;
+  line-height: 30px;
   color: #999;
+  margin: 0;
+  margin-right: 30px;
 }
 #points{
   color: red;
