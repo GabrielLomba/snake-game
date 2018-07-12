@@ -20,6 +20,7 @@ body, html {
   margin-top: 0;
   height: 100%;
   display: grid;
+  position: relative;
 }
 
 .snake-block {
