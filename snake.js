@@ -26,6 +26,7 @@ const setFoodPosition = (position) => {
 }
 
 const updateSnake = () => {
+  body[0].direction = currentDirection
   checkIfHasEatenFood()
   moveBody()
   if (hasCollided() || hasHitItself()) {
@@ -44,7 +45,6 @@ const checkIfHasEatenFood = () => {
 const moveBody = () => {
   const tailCopy = Object.assign({}, body[body.length - 1])
 
-  body[0].direction = currentDirection
   moveBlock(body[0])
   for (let i = 1; i < body.length; ++i) {
     moveBlock(body[i])
@@ -98,8 +98,19 @@ document.addEventListener('keydown', (ev) => {
   changeDirection(ev.keyCode)
 })
 
-window.setInterval(() => {
-  console.log('BEFORE', body[0].x, body[0].y, body.length)
-  updateSnake()
-  console.log('AFTER', body[0].x, body[0].y, body.length)
-}, 500)
+// window.setInterval(() => {
+//   console.log('BEFORE', body[0].x, body[0].y, body.length)
+//   updateSnake()
+//   console.log('AFTER', body[0].x, body[0].y, body.length)
+// }, 500)
+
+body[0].x = 10
+body[0].y = 10
+updateSnake()
+currentDirection = DOWN
+foodPosition = { x: 11, y: 10 }
+updateSnake()
+currentDirection = LEFT
+updateSnake()
+debugger
+updateSnake()
