@@ -1,24 +1,91 @@
-const UP = { x: 0, y: -1 }
-const DOWN = { x: 0, y: 1 }
-const LEFT = { x: -1, y: 0 }
-const RIGHT = { x: 1, y: 0 }
+const LEFT = 37
+const UP = 38
+const RIGHT = 39
+const DOWN = 40
 const BOARD = { cols: 100, rows: 100 }
-const state = () => !Snake.hasCollide || !Snake.hasHitItself ? 'alive' : 'dead'
 
-let dir = { x: 1, y: 0 }
-let head = {x: this.xPos, y: this.yPos}
-let tail = [{ x: 1, y: 0 },{ x: 2, y: 0 }]
-const tailEnd = tail[tail.length-1]
+let state = 'alive'
+const initialHead = { x: 1, y: 1, direction: null }
+const body = [initialHead]
 
-const currDir = () => dir
+let currentDirection = RIGHT
+let foodPosition
+let foodUpdates = []
 
-const nextDir = (D) => {let cD = currDir() 
-    return ({x: cD.x + D.x, y: cD.y + D.y })}
+const changeDirection = (keyCode) => {
+  if (keyCode >= LEFT && keyCode <= DOWN) {
+    currentDirection = keyCode
+  }
+}
 
-const validMove = (move) => move !== 0 ? true : false
-const isEqualPos = (a) => (b) => a.x == b.x && a.y == b.y? true : false
-const hasCollide = () => x > Board.cols || y < Board.rows? true : false
-const hasHitItself = (h) => (t) => t.filter( (point) => isEqualPos(h)(point))
-const hasEaten = (f) => isEqualPos(head)(f)
-const point = (pos) => {pos.x, pos.y}
-const grow = (s) => s.tail.push(point(tailEnd()))
+const setFoodPosition = (position) => {
+  foodPosition = position
+}
+
+const updateSnake = () => {
+  checkIfHasEatenFood()
+  moveBody()
+  if (hasCollided() || hasHitItself()) {
+    state = 'dead'
+    throw Error('Game Over')
+  }
+}
+
+const checkIfHasEatenFood = () => {
+  if(isEqualPos(body[0])(foodPosition)) {
+    foodUpdates.push(foodPosition)
+  }
+}
+
+const moveBody = () => {
+  body[0].direction = currentDirection
+  moveBlock(body[0])
+
+  const tailCopy = Object.assign({}, body[body.length - 1])
+
+  for (let i = 1; i < body.length; ++i) {
+    moveBlock(body[i])
+    body[i].direction = body[i - 1].direction
+  }
+
+  checkForFoodUpdates(tailCopy)
+}
+
+const moveBlock = (block) => {
+  switch (block.direction) {
+    case UP:
+      --block.y
+      break
+    case RIGHT:
+      ++block.x
+      break
+    case DOWN:
+      ++block.y
+      break
+    case LEFT:
+      --block.x
+  }
+}
+
+const checkForFoodUpdates = (tailCopy) => {
+  if (foodUpdates.length && isEqualPos(tailCopy)(foodUpdates[0])) {
+    body.push(tailCopy)
+    foodUpdates.shift()
+  }
+}
+
+const resetSnake = () => {
+  body = [initialHead]
+}
+
+const isEqualPos = (a) => (b) => a.x === b.x && a.y === b.y
+
+const hasCollided = () => body[0].x < 0 || body[0].x > BOARD.cols || body[0].y < 0 || body[0].y > BOARD.rows
+
+const hasHitItself = () => {
+  return body.some(block => {
+    if (i !== 0) {
+      return isEqualPos(body[0])(block)
+    }
+  })
+}
