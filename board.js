@@ -1,33 +1,22 @@
-const GAME_BLOCK_SIDE_SIZE_PX = 30
-let gameMatrix
+import state from './store.js'
 
-const fillInBoard = function () {
+const board = document.querySelector('.board');
 
-  const board = document.querySelector('.board')
+const updateBoard = function () {
+  const windowWidth = parseInt(window.innerWidth);
+  const windowHeight = parseInt(window.innerHeight);
 
-  const rows = Math.floor(board.offsetHeight / GAME_BLOCK_SIDE_SIZE_PX)
-  const cols = Math.floor(board.offsetWidth / GAME_BLOCK_SIDE_SIZE_PX)
+  state.BOARD_ROWS = Math.floor(windowHeight / state.BLOCK_SIZE) - 2
+  state.BOARD_COLS = Math.floor(windowWidth / state.BLOCK_SIZE) - 2
+  state.HAS_STARTED = false
 
-  gameMatrix = []
-  for (let i = 0; i < rows; ++i) {
-    gameMatrix[i] = []
-    for (let j = 0; j < cols; ++j) {
-      gameMatrix[i][j] = '.'
-    }
-  }
+  debugger
+  const normalizedBoardHeight = board.offsetHeight - board.offsetHeight % state.BLOCK_SIZE
+  const normalizedBoardWidth = board.offsetWidth - board.offsetWidth % state.BLOCK_SIZE
 
-  gameMatrix[1][1] = 'head'
-
-  let foodY, foodX
-  do {
-    foodY = Math.floor(Math.random() * rows)
-    foodX = Math.floor(Math.random() * cols)
-  } while (foodX === 1 && foodY === 1)
-
-  gameMatrix[foodY][foodX] = 'food'
-
-  board.style.gridTemplateAreas = `"${gameMatrix.map(row => row.join(' ')).join('" "')}"`
+  board.style.height = `${normalizedBoardHeight}px`;
+  board.style.width = `${normalizedBoardWidth}px`;
 }
 
-fillInBoard();
-window.onresize = fillInBoard
+updateBoard();
+window.onresize = updateBoard

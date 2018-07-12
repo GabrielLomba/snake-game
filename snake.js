@@ -103,13 +103,12 @@ const hasHitItself = () => {
 
 document.addEventListener('keydown', (ev) => {
   changeDirection(ev.keyCode)
-
 })
 
 window.setInterval(() => {
-  console.log('BEFORE', body[0].x, body[0].y, body.length)
+  //console.log('BEFORE', body[0].x, body[0].y, body.length)
   updateSnake()
-  console.log('AFTER', body[0].x, body[0].y, body.length)
+  //console.log('AFTER', body[0].x, body[0].y, body.length)
 }, 300)
 
 // body[0].x = 10
