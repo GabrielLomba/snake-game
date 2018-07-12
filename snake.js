@@ -5,11 +5,14 @@ const DOWN = 40
 const BOARD = { cols: 100, rows: 100 }
 
 let state = 'alive'
-const initialHead = { x: 1, y: 1, direction: null }
+const initialHead = { x: 0, y: 0, direction: null }
 const body = [initialHead]
 
 let currentDirection = RIGHT
-let foodPosition = { x: 10, y: 10 }
+const foodCss = document.getElementById('food');
+
+let foodPosition = { x: parseInt(foodCss.style.left), y: parseInt(foodCss.style.top)}
+console.log(foodPosition);
 let foodUpdates = []
 
 const changeDirection = (keyCode) => {
@@ -44,7 +47,6 @@ const checkIfHasEatenFood = () => {
 
 const moveBody = () => {
   const tailCopy = Object.assign({}, body[body.length - 1])
-
   moveBlock(body[0])
   for (let i = 1; i < body.length; ++i) {
     moveBlock(body[i])
@@ -57,16 +59,21 @@ const moveBody = () => {
 const moveBlock = (block) => {
   switch (block.direction) {
     case UP:
-      --block.y
+      block.y -= blockSize;
+      snakeHead.style.top = `${block.y}px`
       break
     case RIGHT:
-      ++block.x
+      block.x+= blockSize;
+      snakeHead.style.left = `${block.x}px`
       break
     case DOWN:
-      ++block.y
+      block.y += blockSize;
+      snakeHead.style.top = `${block.y}px`
       break
     case LEFT:
-      --block.x
+      block.x -= blockSize;
+      snakeHead.style.left = `${block.x}px`
+      break
   }
 }
 
@@ -96,21 +103,19 @@ const hasHitItself = () => {
 
 document.addEventListener('keydown', (ev) => {
   changeDirection(ev.keyCode)
+
 })
 
-// window.setInterval(() => {
-//   console.log('BEFORE', body[0].x, body[0].y, body.length)
-//   updateSnake()
-//   console.log('AFTER', body[0].x, body[0].y, body.length)
-// }, 500)
+window.setInterval(() => {
+  console.log('BEFORE', body[0].x, body[0].y, body.length)
+  updateSnake()
+  console.log('AFTER', body[0].x, body[0].y, body.length)
+}, 300)
 
-body[0].x = 10
-body[0].y = 10
-updateSnake()
-currentDirection = DOWN
-foodPosition = { x: 11, y: 10 }
-updateSnake()
-currentDirection = LEFT
-updateSnake()
-debugger
-updateSnake()
+// body[0].x = 10
+// body[0].y = 10
+currentDirection = RIGHT
+// foodPosition = { x: 11, y: 10 }
+// currentDirection = LEFT
+// updateSnake()
+// debugger

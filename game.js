@@ -49,6 +49,12 @@ function startgame() {
   const foodTop = `${randomGen(boardMarginBottom,heightNumber,blockSize)}px`;
   food.style.left = foodLeft;
   food.style.top = foodTop;
+  //CREATE SNAKE.JS SCRIPT FILE
+  const script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "snake.js";
+  document.getElementsByTagName("head")[0].appendChild(script);
+  return false;
 }
 
 function showHighestScores () {
