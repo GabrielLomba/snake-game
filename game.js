@@ -3,19 +3,35 @@ import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
 import { GAME_ITERATION_MILLISSECONDS } from './constants.js' 
 
-const cover = document.querySelector('.cover');
-const startButton = document.getElementById('startGameBtn');
-const highestScoresBox = document.querySelector('.highest-scores-box');
-const highestScoresBtn = document.getElementById('highestScoresBtn');
+const $ = (sel) => {return document.querySelector(sel)}
+const cover = $('.cover');
+const startButton = $('#startGameBtn');
+const highestScoresBox = $('.highest-scores-box');
+const highestScoresBtn = $('#highestScoresBtn');
+const playAgainBox = $('.play-again-box')
 const playAgainBtns = document.querySelectorAll('.again');
+
 
 function hideCover () {
   cover.style.display = 'none';
 }
-
+function showCover () {
+  cover.style.display = 'block';
+}
+function showPlayAgain () {
+  showCover()
+  playAgainBox.style.display = 'grid';
+  showChildren(playAgainBox);
+}
+// showPlayAgain()
 function hideCoverChildren () {
   Array.from(cover.children).forEach(child => {
     child.style.display = 'none';
+  });
+}
+function showChildren (el) {
+  Array.from(el.children).forEach(child => {
+    child.style.display = 'block';
   });
 }
 
@@ -25,6 +41,7 @@ function startgame() {
   generateRandomFood()
   state.GAME_HAS_STARTED = true
   return false;
+  
 }
 
 function showHighestScores () {
