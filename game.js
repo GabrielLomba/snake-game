@@ -1,6 +1,7 @@
 import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
+import { GAME_ITERATION_MILLISSECONDS } from './constants.js' 
 
 const cover = document.querySelector('.cover');
 const startButton = document.getElementById('startGameBtn');
@@ -48,4 +49,4 @@ window.setInterval(() => {
       resetSnake()
     }
   }
-}, 300)
+}, GAME_ITERATION_MILLISSECONDS)

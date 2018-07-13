@@ -37,7 +37,7 @@ const moveBody = () => {
   const tailCopy = Object.assign({}, state.SNAKE_BODY[state.SNAKE_BODY.length - 1])
 
   moveBlock(0)
-  for (let i = 1; i < state.SNAKE_BODY.length; ++i) {
+  for (let i = state.SNAKE_BODY.length - 1; i >= 1; --i) {
     moveBlock(i)
     state.SNAKE_BODY[i].direction = state.SNAKE_BODY[i - 1].direction
   }
