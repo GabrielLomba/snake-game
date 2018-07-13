@@ -33,8 +33,13 @@ body, html {
   width: 30px;
   height: 30px;
   position: absolute;
-  grid-area: head;
-  display: none;
+}
+
+.snake-body {
+  background: goldenrod;
+  width: 30px;
+  height: 30px;
+  position: absolute;
 }
 
 .snake-food {
@@ -42,8 +47,6 @@ body, html {
   position: absolute;
   height: 30px;
   width: 30px;
-  grid-area: food;
-  display: none;
 }
 
 #score {

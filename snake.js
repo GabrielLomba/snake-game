@@ -1,102 +1,98 @@
-const LEFT = 37
-const UP = 38
-const RIGHT = 39
-const DOWN = 40
-const BOARD = { cols: 100, rows: 100 }
+import { LEFT, UP, RIGHT, DOWN } from './constants.js'
+import { placeBlockInBoard } from './utils.js'
+import state from './store.js'
 
-let state = 'alive'
-const initialHead = { x: 0, y: 0, direction: null }
-const body = [initialHead]
-
-let currentDirection = RIGHT
-const foodCss = document.getElementById('food');
-
-let foodPosition = { x: parseInt(foodCss.style.left), y: parseInt(foodCss.style.top)}
-console.log(foodPosition);
-let foodUpdates = []
+const board = document.querySelector('.board');
+const bodyElements = [document.querySelector('.snake-head')]
+placeBlockInBoard(bodyElements[0], state.SNAKE_BODY[0])
 
 const changeDirection = (keyCode) => {
   if (keyCode >= LEFT && keyCode <= DOWN) {
-    const isOppositeDirection = Math.abs(currentDirection - keyCode) === 2
+    const headDirection = state.SNAKE_BODY[0].direction
+    const isOppositeDirection = Math.abs(headDirection - keyCode) === 2
     if (!isOppositeDirection) {
-      currentDirection = keyCode
+      state.CURRENT_DIRECTION = keyCode
     }
   }
 }
 
-const setFoodPosition = (position) => {
-  foodPosition = position
-}
-
-const updateSnake = () => {
-  body[0].direction = currentDirection
+export function updateSnake() {
+  state.SNAKE_BODY[0].direction = state.CURRENT_DIRECTION
   checkIfHasEatenFood()
   moveBody()
   if (hasCollided() || hasHitItself()) {
-    state = 'dead'
     throw Error('Game Over')
   }
 }
 
 const checkIfHasEatenFood = () => {
-  if(foodPosition && isEqualPos(body[0])(foodPosition)) {
-    console.log('FOOD UPDATE', foodPosition)
-    foodUpdates.push(foodPosition)
+  if (isEqualPos(state.SNAKE_BODY[0])(state.FOOD_POSITION)) {
+    console.log('FOOD UPDATE', state.FOOD_POSITION)
+    state.FOOD_UPDATES.push(state.FOOD_POSITION)
+    state.FOOD_POSITION = null
   }
 }
 
 const moveBody = () => {
-  const tailCopy = Object.assign({}, body[body.length - 1])
-  moveBlock(body[0])
-  for (let i = 1; i < body.length; ++i) {
-    moveBlock(body[i])
-    body[i].direction = body[i - 1].direction
+  const tailCopy = Object.assign({}, state.SNAKE_BODY[state.SNAKE_BODY.length - 1])
+
+  moveBlock(0)
+  for (let i = 1; i < state.SNAKE_BODY.length; ++i) {
+    moveBlock(i)
+    state.SNAKE_BODY[i].direction = state.SNAKE_BODY[i - 1].direction
   }
 
   checkForFoodUpdates(tailCopy)
 }
 
-const moveBlock = (block) => {
+const moveBlock = (blockIdx) => {
+  const block = state.SNAKE_BODY[blockIdx]
   switch (block.direction) {
     case UP:
-      block.y -= blockSize;
-      snakeHead.style.top = `${block.y}px`
+      block.y -= 1;
       break
     case RIGHT:
-      block.x+= blockSize;
-      snakeHead.style.left = `${block.x}px`
+      block.x += 1;
       break
     case DOWN:
-      block.y += blockSize;
-      snakeHead.style.top = `${block.y}px`
+      block.y += 1;
       break
     case LEFT:
-      block.x -= blockSize;
-      snakeHead.style.left = `${block.x}px`
+      block.x -= 1;
       break
   }
+
+  placeBlockInBoard(bodyElements[blockIdx], block)
 }
 
 const checkForFoodUpdates = (tailCopy) => {
-  if (foodUpdates.length && isEqualPos(tailCopy)(foodUpdates[0])) {
+  if (state.FOOD_UPDATES.length && isEqualPos(tailCopy)(state.FOOD_UPDATES[0])) {
     console.log('BODY INSCREASED')
-    body.push(tailCopy)
-    foodUpdates.shift()
+    createBodyElement(tailCopy)
+    state.SNAKE_BODY.push(tailCopy)
+    state.FOOD_UPDATES.shift()
   }
 }
 
-const resetSnake = () => {
-  body = [initialHead]
+const createBodyElement = (block) => {
+  const newTailElement = document.createElement('div')
+  newTailElement.classList.add('snake-body')
+  newTailElement.style.top = `${block.y * state.BLOCK_SIZE}px`
+  newTailElement.style.left = `${block.x * state.BLOCK_SIZE}px`
+  board.appendChild(newTailElement)
+  bodyElements.push(newTailElement)
 }
 
 const isEqualPos = (a) => (b) => a.x === b.x && a.y === b.y
 
-const hasCollided = () => body[0].x < 0 || body[0].x > BOARD.cols || body[0].y < 0 || body[0].y > BOARD.rows
+const hasCollided = () =>
+  state.SNAKE_BODY[0].x < 0 || state.SNAKE_BODY[0].x >= state.BOARD_COLS ||
+  state.SNAKE_BODY[0].y < 0 || state.SNAKE_BODY[0].y >= state.BOARD_ROWS
 
 const hasHitItself = () => {
-  return body.some( (block, i) => {
+  return state.SNAKE_BODY.some((block, i) => {
     if (i !== 0) {
-      return isEqualPos(body[0])(block)
+      return hasSamePositionAsHead(block)
     }
   })
 }
@@ -105,16 +101,10 @@ document.addEventListener('keydown', (ev) => {
   changeDirection(ev.keyCode)
 })
 
-window.setInterval(() => {
-  //console.log('BEFORE', body[0].x, body[0].y, body.length)
-  updateSnake()
-  //console.log('AFTER', body[0].x, body[0].y, body.length)
-}, 300)
+export function resetSnake() {
+  state.SNAKE_BODY = [state.INITIAL_HEAD_POSITION]
+}
 
-// body[0].x = 10
-// body[0].y = 10
-currentDirection = RIGHT
-// foodPosition = { x: 11, y: 10 }
-// currentDirection = LEFT
-// updateSnake()
-// debugger
+export function hasSamePositionAsHead(block) {
+  return isEqualPos(state.SNAKE_BODY[0])(block)
+}
