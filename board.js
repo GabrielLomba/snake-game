@@ -5,34 +5,34 @@ const board = document.querySelector('.board');
 const boardContainer = board.parentElement
 const scoreHeight = getScoreElementHeight()
 
-const normalizeHeight = function() {
+const getNormalizedBoardHeight = function() {
   const boardStyle = window.getComputedStyle(board)
   const topBottomMargins = parseInt(boardStyle.marginTop) + parseInt(boardStyle.marginBottom)
   const availableHeight = boardContainer.offsetHeight - scoreHeight - topBottomMargins
   const normalizedBoardHeight = availableHeight - availableHeight % state.BLOCK_SIZE
 
-  board.style.height = `${normalizedBoardHeight}px`;
+  return normalizedBoardHeight
 }
 
-const normalizeWidth = function() {
+const getNormalizedBoardWidth = function() {
   const boardStyle = window.getComputedStyle(board)
   const leftRightMargins = parseInt(boardStyle.marginLeft) + parseInt(boardStyle.marginRight)
   const availableWidth = boardContainer.offsetWidth - leftRightMargins
   const normalizedBoardWidth = availableWidth - availableWidth % state.BLOCK_SIZE
 
-  board.style.width = `${normalizedBoardWidth}px`;
+  return normalizedBoardWidth
 }
 
 const updateBoard = function () {
-  const windowWidth = parseInt(window.innerWidth);
-  const windowHeight = parseInt(window.innerHeight);
+  const normalizedBoardHeight = getNormalizedBoardHeight()
+  const normalizedBoardWidth = getNormalizedBoardWidth()
 
-  state.BOARD_ROWS = Math.floor(windowHeight / state.BLOCK_SIZE) - 2
-  state.BOARD_COLS = Math.floor(windowWidth / state.BLOCK_SIZE) - 2
-  state.HAS_STARTED = false
+  state.BOARD_ROWS = normalizedBoardHeight / state.BLOCK_SIZE
+  state.BOARD_COLS = normalizedBoardWidth / state.BLOCK_SIZE
+  state.GAME_HAS_STARTED = false
 
-  normalizeHeight()
-  normalizeWidth()
+  board.style.height = `${normalizedBoardHeight}px`;
+  board.style.width = `${normalizedBoardWidth}px`;
 }
 
 updateBoard();
