@@ -1,6 +1,8 @@
+import './board.js'
 import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
+import { incrementScore, resetScore } from './score.js'
 import { GAME_ITERATION_MILLISSECONDS } from './constants.js' 
 
 const $ = (sel) => {return document.querySelector(sel)}
@@ -42,6 +44,7 @@ function startgame() {
   hideCoverChildren();
   generateRandomFood()
   resetSnake()
+  resetScore()
   state.GAME_HAS_STARTED = true
   return false;
 }
@@ -60,6 +63,7 @@ window.setInterval(() => {
     try {
       updateSnake()
       if (!state.FOOD_POSITION) {
+        incrementScore()
         generateRandomFood()
       }
     } catch (err) {

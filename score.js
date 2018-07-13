@@ -1,4 +1,4 @@
-const MAX_ENTRIES = 5
+import { MAX_SCORE_ENTRIES } from './constants.js'
 
 const scoreEl = document.querySelector('#score')
 const highestScoresContainer = document.querySelector('.score-entries')
@@ -10,12 +10,12 @@ let score = 0
 const updateHighestScores = function (username) {
   let i = 0;
 
-  while(i < MAX_ENTRIES && highestScores[i] && highestScores[i].score > score) ++i
+  while (i < MAX_SCORE_ENTRIES && highestScores[i] && highestScores[i].score > score)++i
 
-  if (i < MAX_ENTRIES) {
+  if (i < MAX_SCORE_ENTRIES) {
     highestScores = highestScores.slice(0, i)
-      .concat([ { username, score } ])
-      .concat(highestScores.slice(i, MAX_ENTRIES))
+      .concat([{ username, score }])
+      .concat(highestScores.slice(i, MAX_SCORE_ENTRIES))
   }
 }
 
@@ -38,12 +38,17 @@ const updateScoreEl = function () {
   scoreEl.textContent = `Score: ${score}`
 }
 
-export function increment () {
+export function incrementScore() {
   ++score
   updateScoreEl()
 }
 
-export function createScoreEntry (username) {
+export function resetScore() {
+  score = 0
+  updateScoreEl()
+}
+
+export function createScoreEntry(username) {
   updateHighestScores(username)
   updateHighestScoresEl()
   reset()
