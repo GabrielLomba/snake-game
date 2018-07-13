@@ -38,12 +38,12 @@ const updateScoreEl = function () {
   scoreEl.textContent = `Score: ${score}`
 }
 
-const increment = function () {
+export function increment () {
   ++score
   updateScoreEl()
 }
 
-const createScoreEntry = function (username) {
+export function createScoreEntry (username) {
   updateHighestScores(username)
   updateHighestScoresEl()
   reset()
@@ -54,7 +54,7 @@ const reset = function () {
   updateScoreEl()
 }
 
-export default {
-  increment,
-  createScoreEntry
+export function getScoreElementHeight() {
+  const scoreStyle = window.getComputedStyle(scoreEl)
+  return parseInt(scoreStyle.height)
 }
