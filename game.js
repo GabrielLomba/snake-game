@@ -15,15 +15,17 @@ const playAgainBtns = document.querySelectorAll('.again');
 function hideCover () {
   cover.style.display = 'none';
 }
+
 function showCover () {
   cover.style.display = 'block';
 }
+
 function showPlayAgain () {
   showCover()
   playAgainBox.style.display = 'grid';
   showChildren(playAgainBox);
 }
-// showPlayAgain()
+
 function hideCoverChildren () {
   Array.from(cover.children).forEach(child => {
     child.style.display = 'none';
@@ -39,9 +41,9 @@ function startgame() {
   hideCover();
   hideCoverChildren();
   generateRandomFood()
+  resetSnake()
   state.GAME_HAS_STARTED = true
   return false;
-  
 }
 
 function showHighestScores () {
@@ -63,7 +65,7 @@ window.setInterval(() => {
     } catch (err) {
       console.error(err)
       state.GAME_HAS_STARTED = false
-      resetSnake()
+      showPlayAgain()
     }
   }
 }, GAME_ITERATION_MILLISSECONDS)
