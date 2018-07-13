@@ -3,16 +3,14 @@ import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
 import { incrementScore, resetScore } from './score.js'
-import { GAME_ITERATION_MILLISSECONDS } from './constants.js' 
+import { $, GAME_ITERATION_MILLISSECONDS } from './constants.js' 
 
-const $ = (sel) => {return document.querySelector(sel)}
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
 const highestScoresBox = $('.highest-scores-box');
 const highestScoresBtn = $('#highestScoresBtn');
 const playAgainBox = $('.play-again-box')
 const playAgainBtns = document.querySelectorAll('.again');
-
 
 function hideCover () {
   cover.style.display = 'none';
