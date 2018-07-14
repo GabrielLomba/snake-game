@@ -6,17 +6,6 @@ const board = document.querySelector('.board');
 let bodyElements = [document.querySelector('.snake-head')]
 placeBlockInBoard(bodyElements[0], state.SNAKE_BODY[0])
 
-const changeDirection = (keyCode) => {
-  state.WAITING_USER_INPUT = false
-  if (keyCode >= LEFT && keyCode <= DOWN) {
-    const headDirection = state.SNAKE_BODY[0].direction
-    const isOppositeDirection = Math.abs(headDirection - keyCode) === 2
-    if (!isOppositeDirection) {
-      state.CURRENT_DIRECTION = keyCode
-    }
-  }
-}
-
 export function updateSnake() {
   state.SNAKE_BODY[0].direction = state.CURRENT_DIRECTION
   checkIfHasEatenFood()
@@ -105,10 +94,6 @@ const hasCollided = () =>
 const hasHitItself = () => {
   return isWithinBody(state.SNAKE_BODY[0], false)
 }
-
-document.addEventListener('keydown', (ev) => {
-  changeDirection(ev.keyCode)
-})
 
 export function resetSnake() {
   state.SNAKE_BODY.splice(0, state.SNAKE_BODY.length, Object.assign({}, state.INITIAL_HEAD_POSITION))

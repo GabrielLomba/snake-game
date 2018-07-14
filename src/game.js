@@ -3,7 +3,7 @@ import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
 import { incrementScore, resetScore, createScoreEntry, resetUsernameInput } from './score.js'
-import { $, GAME_ITERATION_MILLISSECONDS } from './constants.js' 
+import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN } from './constants.js' 
 
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
@@ -62,6 +62,13 @@ submitScoreBtn.addEventListener('click', function () {
 })
 
 window.setInterval(() => {
+  updateGameState()
+  if(state.SPACE_PRESSED) {
+    setTimeout(() => updateGameState(), GAME_ITERATION_MILLISSECONDS / 2)
+  }
+}, GAME_ITERATION_MILLISSECONDS)
+
+function updateGameState() {
   if (state.GAME_HAS_STARTED && !state.WAITING_USER_INPUT) {
     try {
       updateSnake()
@@ -74,12 +81,38 @@ window.setInterval(() => {
       showPlayAgain()
     }
   }
-}, GAME_ITERATION_MILLISSECONDS)
+}
 
 window.onresize = function() {
   updateBoard()
   if(state.GAME_HAS_STARTED) {
     state.GAME_HAS_STARTED = false
     showPlayAgain()
+  }
+}
+
+window.onkeydown = function(event) {
+  changeDirection(event.keyCode)
+  if (event.keyCode === SPACE) {
+    console.log('SPACE PRESSED')
+    state.SPACE_PRESSED = true
+  }
+}
+
+const changeDirection = (keyCode) => {
+  state.WAITING_USER_INPUT = false
+  if (keyCode >= LEFT && keyCode <= DOWN) {
+    const headDirection = state.SNAKE_BODY[0].direction
+    const isOppositeDirection = Math.abs(headDirection - keyCode) === 2
+    if (!isOppositeDirection) {
+      state.CURRENT_DIRECTION = keyCode
+    }
+  }
+}
+
+window.onkeyup = function(event) {
+  if (event.keyCode === SPACE) {
+    console.log('SPACE RELEASED')
+    state.SPACE_PRESSED = false
   }
 }
