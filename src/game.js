@@ -94,7 +94,6 @@ window.onresize = function() {
 window.onkeydown = function(event) {
   changeDirection(event.keyCode)
   if (event.keyCode === SPACE) {
-    console.log('SPACE PRESSED')
     state.SPACE_PRESSED = true
   }
 }
@@ -112,7 +111,6 @@ const changeDirection = (keyCode) => {
 
 window.onkeyup = function(event) {
   if (event.keyCode === SPACE) {
-    console.log('SPACE RELEASED')
     state.SPACE_PRESSED = false
   }
 }
