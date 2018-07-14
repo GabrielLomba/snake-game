@@ -34,6 +34,8 @@ body, html {
   height: 30px;
   position: absolute;
   z-index: 100;
+  background: url('./images/snake.svg');
+  transform: rotate(-90deg);
 }
 
 .snake-body {

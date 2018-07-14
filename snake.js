@@ -51,15 +51,19 @@ const moveBlock = (blockIdx) => {
   switch (block.direction) {
     case UP:
       block.y -= 1;
+      bodyElements[0].style.transform = 'rotate(180deg)';
       break
     case RIGHT:
       block.x += 1;
+      bodyElements[0].style.transform = 'rotate(-90deg)';
       break
     case DOWN:
       block.y += 1;
+      bodyElements[0].style.transform = 'rotate(0deg)';
       break
     case LEFT:
       block.x -= 1;
+      bodyElements[0].style.transform = 'rotate(90deg)';
       break
   }
 
