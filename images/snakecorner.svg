@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg2197"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm">
+  <title
+     id="title3313">snake corner</title>
+  <defs
+     id="defs2191" />
+  <metadata
+     id="metadata2194">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>snake corner</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1">
+    <g
+       id="g2158"
+       transform="translate(0.55130492,-0.13230166)">
+      <path
+         style="fill:#285a85;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 64.5,0 c 0,0 3.700596,32.33022 24.505948,72.63262 9.10372,17.634971 1.190371,41.09288 -18.35714,36.08897 -19.547511,-5.00391 -71.20011292,0.82143 -71.20011292,0.82143 l 1.42034254,79.08928 c 0,0 18.63286638,-10.45022 70.40477038,0 C 123.1495,199.10347 192.51616,159.85395 166.73809,76.412383 156.07712,41.903679 144.49999,0 144.49999,0 Z"
+         id="path1579-4" />
+    </g>
+    <g
+       id="g2158-4"
+       transform="translate(0.55130492,-0.13230166)">
+      <path
+         style="fill:#1b3d5b;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 64.5,0 c 0,0 3.700596,32.33022 24.505948,72.63262 9.10372,17.634971 1.190371,41.09288 -18.35714,36.08897 -19.547511,-5.00391 -71.20011292,0.82143 -71.20011292,0.82143 l 1.42034254,10.29761 c 0,0 35.75868438,-4.73859 70.40477038,0 C 105.26954,124.49028 110.40635,92.05471 102.48214,76.412383 85.574601,43.03702 78.732133,0 78.732133,0 Z"
+         id="path1579-4-7" />
+    </g>
+  </g>
+</svg>
