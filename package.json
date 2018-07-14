@@ -4,7 +4,7 @@
   "description": "A Snake Game built with plain HTML/CSS and JS!",
   "private": true,
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js && cleancss -O2 --root ./dist -o ./dist/styles.min.css styles.css"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/GabrielLomba/snake-game#readme",
   "devDependencies": {
+    "clean-css-cli": "^4.1.11",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.0.8"
   }

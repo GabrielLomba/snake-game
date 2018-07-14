@@ -34,7 +34,7 @@ body, html {
   height: 30px;
   position: absolute;
   z-index: 100;
-  background: url('./images/snake.svg');
+  background: url('./dist/images/snake.svg');
   transform: rotate(-90deg);
 }
 
@@ -44,7 +44,7 @@ body, html {
   height: 28px;
   margin: 1px;
   position: absolute;
-  background: url('./images/body2.svg');
+  background: url('./dist/images/body2.svg');
   background-size: 100%;
 
 }
