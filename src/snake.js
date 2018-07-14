@@ -40,30 +40,34 @@ const moveBlock = (blockIdx) => {
     case UP:
       block.y -= 1;
       if (blockIdx === 0) {
-        bodyElements[0].style.transform = 'rotate(180deg)';
+        rotateHead(180)
       }
       break
     case RIGHT:
       block.x += 1;
       if (blockIdx === 0) {
-        bodyElements[0].style.transform = 'rotate(-90deg)';
+        rotateHead(-90)
       }
       break
     case DOWN:
       block.y += 1;
       if (blockIdx === 0) {
-        bodyElements[0].style.transform = 'rotate(0deg)';
+        rotateHead(0)
       }
       break
     case LEFT:
       block.x -= 1;
       if (blockIdx === 0) {
-        bodyElements[0].style.transform = 'rotate(90deg)';
+        rotateHead(90)
       }
       break
   }
 
   placeBlockInBoard(bodyElements[blockIdx], block)
+}
+
+const rotateHead = (degrees) => {
+  bodyElements[0].style.transform = `rotate(${degrees}deg)`;
 }
 
 const checkForFoodUpdates = (tailCopy) => {
@@ -101,7 +105,8 @@ export function resetSnake() {
   bodyElements.slice(1).forEach(el => {
     el.parentNode.removeChild(el)
   })
-  bodyElements = [document.querySelector('.snake-head')]
+  bodyElements = [document.querySelector('.snake-head') ]
+  rotateHead(-90)
   moveBody(0)
 }
 
