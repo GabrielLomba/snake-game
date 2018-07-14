@@ -1,4 +1,4 @@
-import './board.js'
+import { updateBoard } from './board.js'
 import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
@@ -75,3 +75,11 @@ window.setInterval(() => {
     }
   }
 }, GAME_ITERATION_MILLISSECONDS)
+
+window.onresize = function() {
+  updateBoard()
+  if(state.GAME_HAS_STARTED) {
+    state.GAME_HAS_STARTED = false
+    showPlayAgain()
+  }
+}
