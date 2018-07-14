@@ -17,7 +17,6 @@ export function updateSnake() {
 
 const checkIfHasEatenFood = () => {
   if (isEqualPos(state.SNAKE_BODY[0])(state.FOOD_POSITION)) {
-    console.log('FOOD UPDATE', state.FOOD_POSITION)
     state.FOOD_UPDATES.push(state.FOOD_POSITION)
     state.FOOD_POSITION = null
   }
@@ -69,7 +68,6 @@ const moveBlock = (blockIdx) => {
 
 const checkForFoodUpdates = (tailCopy) => {
   if (state.FOOD_UPDATES.length && isEqualPos(tailCopy)(state.FOOD_UPDATES[0])) {
-    console.log('BODY INSCREASED')
     createBodyElement(tailCopy)
     state.SNAKE_BODY.push(tailCopy)
     state.FOOD_UPDATES.shift()
