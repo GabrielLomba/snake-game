@@ -3,7 +3,7 @@ import { placeBlockInBoard } from './utils.js'
 import state from './store.js'
 
 const board = document.querySelector('.board');
-const bodyElements = [document.querySelector('.snake-head')]
+let bodyElements = [document.querySelector('.snake-head')]
 placeBlockInBoard(bodyElements[0], state.SNAKE_BODY[0])
 
 const changeDirection = (keyCode) => {
@@ -90,11 +90,7 @@ const hasCollided = () =>
   state.SNAKE_BODY[0].y < 0 || state.SNAKE_BODY[0].y >= state.BOARD_ROWS
 
 const hasHitItself = () => {
-  return state.SNAKE_BODY.some((block, i) => {
-    if (i !== 0) {
-      return hasSamePositionAsHead(block)
-    }
-  })
+  return isWithinBody(state.SNAKE_BODY[0], false)
 }
 
 document.addEventListener('keydown', (ev) => {
@@ -102,9 +98,27 @@ document.addEventListener('keydown', (ev) => {
 })
 
 export function resetSnake() {
-  state.SNAKE_BODY = [state.INITIAL_HEAD_POSITION]
+  state.SNAKE_BODY.splice(0, state.SNAKE_BODY.length, Object.assign({}, state.INITIAL_HEAD_POSITION))
+  state.CURRENT_DIRECTION = RIGHT
+  state.FOOD_UPDATES.splice(0, state.FOOD_UPDATES.length)
+
+  bodyElements.slice(1).forEach(el => {
+    el.parentNode.removeChild(el)
+  })
+  bodyElements = [document.querySelector('.snake-head')]
+  moveBody(0)
 }
 
-export function hasSamePositionAsHead(block) {
-  return isEqualPos(state.SNAKE_BODY[0])(block)
+export function isWithinBody(block, includeHead = true) {
+  let result = false
+  const isEqualBlock = isEqualPos(block)
+
+  for(let i = includeHead ? 0 : 1; i < state.SNAKE_BODY.length; ++i) {
+    if (isEqualBlock(state.SNAKE_BODY[i])) {
+      result = true
+      break
+    }
+  }
+
+  return result
 }
