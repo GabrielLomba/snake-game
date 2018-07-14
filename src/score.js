@@ -1,6 +1,6 @@
 import { $, MAX_SCORE_ENTRIES } from './constants.js'
 
-const scoreEl = $('#score')
+const scorePointsEl = $('#points')
 const usernameInput = $('#username')
 const highestScoresContainer = $('.score-entries')
 
@@ -34,7 +34,7 @@ const updateHighestScoresEl = function () {
 }
 
 const updateScoreEl = function () {
-  scoreEl.innerText = `Score: ${score}`
+  scorePointsEl.innerText = score
 }
 
 export function incrementScore() {
@@ -60,6 +60,6 @@ export function resetUsernameInput() {
 }
 
 export function getScoreElementHeight() {
-  const scoreStyle = window.getComputedStyle(scoreEl)
+  const scoreStyle = window.getComputedStyle(scorePointsEl.parentElement)
   return parseInt(scoreStyle.height)
 }
