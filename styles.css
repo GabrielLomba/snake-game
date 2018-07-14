@@ -43,6 +43,9 @@ body, html {
   width: 30px;
   height: 30px;
   position: absolute;
+  background: url('./images/body2.svg');
+  background-size: 100%;
+
 }
 
 .snake-food {

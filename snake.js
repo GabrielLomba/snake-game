@@ -52,6 +52,7 @@ const moveBlock = (blockIdx) => {
     case UP:
       block.y -= 1;
       bodyElements[0].style.transform = 'rotate(180deg)';
+      
       break
     case RIGHT:
       block.x += 1;
