@@ -2,13 +2,13 @@ import './board.js'
 import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
-import { incrementScore, resetScore } from './score.js'
+import { incrementScore, resetScore, createScoreEntry, resetUsernameInput } from './score.js'
 import { $, GAME_ITERATION_MILLISSECONDS } from './constants.js' 
 
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
 const highestScoresBox = $('.highest-scores-box');
-const highestScoresBtn = $('#highestScoresBtn');
+const submitScoreBtn = $('#submitScoreBtn');
 const playAgainBox = $('.play-again-box')
 const playAgainBtns = document.querySelectorAll('.again');
 
@@ -43,6 +43,7 @@ function startgame() {
   generateRandomFood()
   resetSnake()
   resetScore()
+  resetUsernameInput()
   state.GAME_HAS_STARTED = true
   return false;
 }
@@ -54,7 +55,10 @@ function showHighestScores () {
 
 startButton.addEventListener('click', startgame);
 playAgainBtns.forEach(btn => btn.addEventListener('click', startgame))
-highestScoresBtn.addEventListener('click', showHighestScores)
+submitScoreBtn.addEventListener('click', function () {
+  createScoreEntry()
+  showHighestScores()
+})
 
 window.setInterval(() => {
   if (state.GAME_HAS_STARTED) {

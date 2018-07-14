@@ -1,7 +1,8 @@
-import { MAX_SCORE_ENTRIES } from './constants.js'
+import { $, MAX_SCORE_ENTRIES } from './constants.js'
 
-const scoreEl = document.querySelector('#score')
-const highestScoresContainer = document.querySelector('.score-entries')
+const scoreEl = $('#score')
+const usernameInput = $('#username')
+const highestScoresContainer = $('.score-entries')
 
 let highestScores = []
 
@@ -10,32 +11,30 @@ let score = 0
 const updateHighestScores = function (username) {
   let i = 0;
 
-  while (i < MAX_SCORE_ENTRIES && highestScores[i] && highestScores[i].score > score)++i
+  while (i < MAX_SCORE_ENTRIES && highestScores[i] && highestScores[i].score >= score)++i
 
   if (i < MAX_SCORE_ENTRIES) {
     highestScores = highestScores.slice(0, i)
       .concat([{ username, score }])
-      .concat(highestScores.slice(i, MAX_SCORE_ENTRIES))
+      .concat(highestScores.slice(i, MAX_SCORE_ENTRIES - 1))
   }
 }
 
 const updateHighestScoresEl = function () {
-  clearHighestScoresEl()
-  highestScores.forEach(entry => {
-    const newScoreEntryEl = document.createElement('h2')
-    newScoreEntryEl.textContent = `${entry.username} - ${entry.score}`
-    highestScoresContainer.appendChild(newScoreEntryEl)
+  highestScores.forEach( (entry, idx) => {
+    const scoreEntryEl = highestScoresContainer.children.item(idx)
+    if (scoreEntryEl) {
+      scoreEntryEl.innerText = `${entry.username} - ${entry.score}`
+    } else {
+      const newScoreEntryEl = document.createElement('h2')
+      newScoreEntryEl.innerText = `${entry.username} - ${entry.score}`
+      highestScoresContainer.appendChild(newScoreEntryEl)
+    }
   })
 }
 
-const clearHighestScoresEl = function () {
-  while (highestScoresContainer.firstChild) {
-    highestScoresContainer.removeChild(highestScoresContainer.firstChild);
-  }
-}
-
 const updateScoreEl = function () {
-  scoreEl.textContent = `Score: ${score}`
+  scoreEl.innerText = `Score: ${score}`
 }
 
 export function incrementScore() {
@@ -48,15 +47,16 @@ export function resetScore() {
   updateScoreEl()
 }
 
-export function createScoreEntry(username) {
-  updateHighestScores(username)
-  updateHighestScoresEl()
-  reset()
+export function createScoreEntry() {
+  const username = usernameInput.value
+  if (username) {
+    updateHighestScores(username)
+    updateHighestScoresEl()
+  }
 }
 
-const reset = function () {
-  score = 0
-  updateScoreEl()
+export function resetUsernameInput() {
+  usernameInput.value = ''
 }
 
 export function getScoreElementHeight() {
