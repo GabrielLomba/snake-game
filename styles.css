@@ -34,12 +34,15 @@ body, html {
   height: 30px;
   position: absolute;
   z-index: 100;
+  background: url('./images/snake.svg');
+  transform: rotate(-90deg);
 }
 
 .snake-body {
   background: goldenrod;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
+  margin: 1px;
   position: absolute;
 }
 

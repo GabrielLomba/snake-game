@@ -51,15 +51,27 @@ const moveBlock = (blockIdx) => {
   switch (block.direction) {
     case UP:
       block.y -= 1;
+      if (blockIdx === 0) {
+        bodyElements[0].style.transform = 'rotate(180deg)';
+      }
       break
     case RIGHT:
       block.x += 1;
+      if (blockIdx === 0) {
+        bodyElements[0].style.transform = 'rotate(-90deg)';
+      }
       break
     case DOWN:
       block.y += 1;
+      if (blockIdx === 0) {
+        bodyElements[0].style.transform = 'rotate(0deg)';
+      }
       break
     case LEFT:
       block.x -= 1;
+      if (blockIdx === 0) {
+        bodyElements[0].style.transform = 'rotate(90deg)';
+      }
       break
   }
 
@@ -114,7 +126,7 @@ export function isWithinBody(block, includeHead = true) {
   let result = false
   const isEqualBlock = isEqualPos(block)
 
-  for(let i = includeHead ? 0 : 1; i < state.SNAKE_BODY.length; ++i) {
+  for (let i = includeHead ? 0 : 1; i < state.SNAKE_BODY.length; ++i) {
     if (isEqualBlock(state.SNAKE_BODY[i])) {
       result = true
       break
