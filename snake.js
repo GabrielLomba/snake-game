@@ -7,6 +7,7 @@ let bodyElements = [document.querySelector('.snake-head')]
 placeBlockInBoard(bodyElements[0], state.SNAKE_BODY[0])
 
 const changeDirection = (keyCode) => {
+  state.WAITING_USER_INPUT = false
   if (keyCode >= LEFT && keyCode <= DOWN) {
     const headDirection = state.SNAKE_BODY[0].direction
     const isOppositeDirection = Math.abs(headDirection - keyCode) === 2

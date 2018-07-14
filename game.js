@@ -45,6 +45,7 @@ function startgame() {
   resetScore()
   resetUsernameInput()
   state.GAME_HAS_STARTED = true
+  state.WAITING_USER_INPUT = true
   return false;
 }
 
@@ -61,7 +62,7 @@ submitScoreBtn.addEventListener('click', function () {
 })
 
 window.setInterval(() => {
-  if (state.GAME_HAS_STARTED) {
+  if (state.GAME_HAS_STARTED && !state.WAITING_USER_INPUT) {
     try {
       updateSnake()
       if (!state.FOOD_POSITION) {
@@ -69,7 +70,6 @@ window.setInterval(() => {
         generateRandomFood()
       }
     } catch (err) {
-      console.error(err)
       state.GAME_HAS_STARTED = false
       showPlayAgain()
     }
