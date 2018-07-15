@@ -18,7 +18,8 @@ export function updateSnake() {
 const checkIfHasEatenFood = () => {
   if (isEqualPos(state.SNAKE_BODY[0])(state.FOOD_POSITION)) {
     state.FOOD_UPDATES.push(state.FOOD_POSITION)
-    state.FOOD_POSITION = null
+    state.FOOD_POSITION = null;
+    document.getElementById('bite').play()
   }
 }
 

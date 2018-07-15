@@ -3,7 +3,7 @@ import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
 import { incrementScore, resetScore, createScoreEntry, resetUsernameInput } from './score.js'
-import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN } from './constants.js' 
+import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN } from './constants.js'
 
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
@@ -24,6 +24,8 @@ function showPlayAgain () {
   showCover()
   playAgainBox.style.display = 'grid';
   showChildren(playAgainBox);
+  document.getElementById('bg').pause()
+  document.getElementById('loss').play()
 }
 
 function hideCoverChildren () {
@@ -46,6 +48,9 @@ function startgame() {
   resetUsernameInput()
   state.GAME_HAS_STARTED = true
   state.WAITING_USER_INPUT = true
+  document.getElementById('bg').play()
+  document.getElementById('bg').loop = true;
+  document.getElementById('bg').volume = 0.2;
   return false;
 }
 
