@@ -6,31 +6,33 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Snake game</title>
   <link rel="stylesheet" type="text/css" href="./dist/styles.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
 </head>
 
 <body>
   <div id="container">
-    <div class="top"><p>press <span id="tip">spacebar</span> to speed up the game</p><h2 id="score">Score: <span id="points">0</span></h2></div>
+    <div class="top"><p class="m-0">press <span id="tip">spacebar</span> to speed up the game</p><h2 id="score">Score: <span id="points">0</span></h2></div>
     <div class="board">
       <div class="snake-head"></div>
       <div class="snake-food" id="food"></div>
     </div>
-   
+
     <div class="cover">
       <div class="play-again-box">
         <h1 class="message">Oops! You lost</h1>
-        <input type="text" name="username" id="username" placeholder="Enter your name">
+        <input maxlength='4' type="text" name="username" id="username" placeholder="Name">
         <button class="highest-scores" id="submitScoreBtn">Submit score</button>
         <button class="again">Play Again</button>
       </div>
       <div class="highest-scores-box">
-        <h1 class="title">Highest Scores</h1>
+        <h1 class="title fs-30">Highest Scores</h1>
         <div class="score-entries"></div>
-        <button class="again">Play Again</button>
+        <button class="again m-5">Play Again</button>
       </div>
       <div class="start-box">
-          <h1 class="title">Snake 1.0</h1>
+          <h1 class="title">Sneaky Snake!</h1>
           <button class="start" id="startGameBtn">Play Game</button>
+          <div class="score-entries"></div>
       </div>
     </div>
   </div>
