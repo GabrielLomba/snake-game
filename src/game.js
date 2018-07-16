@@ -133,12 +133,10 @@ let touchendY = 0;
 function touch(ev) {
   touchstartX = ev.touches[0].screenX
   touchstartY = ev.touches[0].screenY
-  console.log(ev.touches, ev.type);
 }
 function touchMove(ev) {
   touchendX = ev.touches[0].screenX;
   touchendY = ev.touches[0].screenY;
-  console.log(ev.touches, ev.type);
 }
 function handleSwipe() {
   let diffX = Math.abs(touchstartX - touchendX)
