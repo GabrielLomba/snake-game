@@ -131,10 +131,12 @@ let touchendX = 0;
 let touchendY = 0;
 
 function touch(ev) {
+  ev.preventDefault()
   touchstartX = ev.touches[0].screenX
   touchstartY = ev.touches[0].screenY
 }
 function touchMove(ev) {
+  ev.preventDefault()
   touchendX = ev.touches[0].screenX;
   touchendY = ev.touches[0].screenY;
 }
