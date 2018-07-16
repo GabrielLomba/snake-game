@@ -252,9 +252,6 @@ body, html {
   grid-area: title;
   font-size: 60px;
   color: #f2f2f0;
-}
-.fs-30{
-  font-size: 30px;
   letter-spacing: 2px;
 }
 
@@ -288,6 +285,9 @@ body, html {
 }
 
 @media screen and (max-width: 1000px) {
+  .title{
+    font-size: 6vw;
+  }
   .play-again-box{
       width: 60%;
   }
@@ -298,6 +298,12 @@ body, html {
 }
 
 @media screen and (max-width: 600px) {
+  .top p{
+    display: none;
+  }
+  .title {
+    font-size: 30px;
+  }
   .play-again-box{
       width: 95%;
       padding: 0;
@@ -307,4 +313,8 @@ body, html {
       width: 95%;
       padding: 0;
   }
+  .start-box{
+    padding-bottom: 1em;
+  }
+  
 }
