@@ -3,7 +3,7 @@ import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
 import { incrementScore, resetScore, createScoreEntry, resetUsernameInput } from './score.js'
-import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN } from './constants.js'
+import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN, RIGHT, UP } from './constants.js'
 
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
@@ -12,15 +12,15 @@ const submitScoreBtn = $('#submitScoreBtn');
 const playAgainBox = $('.play-again-box')
 const playAgainBtns = document.querySelectorAll('.again');
 
-function hideCover () {
+function hideCover() {
   cover.style.display = 'none';
 }
 
-function showCover () {
+function showCover() {
   cover.style.display = 'block';
 }
 
-function showPlayAgain () {
+function showPlayAgain() {
   showCover()
   playAgainBox.style.display = 'grid';
   showChildren(playAgainBox);
@@ -28,12 +28,12 @@ function showPlayAgain () {
   document.getElementById('loss').play()
 }
 
-function hideCoverChildren () {
+function hideCoverChildren() {
   Array.from(cover.children).forEach(child => {
     child.style.display = 'none';
   });
 }
-function showChildren (el) {
+function showChildren(el) {
   Array.from(el.children).forEach(child => {
     child.style.display = 'block';
   });
@@ -54,7 +54,7 @@ function startgame() {
   return false;
 }
 
-function showHighestScores () {
+function showHighestScores() {
   hideCoverChildren();
   highestScoresBox.style.display = 'grid';
 }
@@ -68,7 +68,7 @@ submitScoreBtn.addEventListener('click', function () {
 
 window.setInterval(() => {
   updateGameState()
-  if(state.SPACE_PRESSED) {
+  if (state.SPACE_PRESSED) {
     setTimeout(() => updateGameState(), GAME_ITERATION_MILLISSECONDS / 2)
   }
 }, GAME_ITERATION_MILLISSECONDS)
@@ -88,15 +88,15 @@ function updateGameState() {
   }
 }
 
-window.onresize = function() {
+window.onresize = function () {
   updateBoard()
-  if(state.GAME_HAS_STARTED) {
+  if (state.GAME_HAS_STARTED) {
     state.GAME_HAS_STARTED = false
     showPlayAgain()
   }
 }
 
-window.onkeydown = function(event) {
+window.onkeydown = function (event) {
   changeDirection(event.keyCode)
   if (event.keyCode === SPACE) {
     state.SPACE_PRESSED = true
@@ -114,8 +114,50 @@ const changeDirection = (keyCode) => {
   }
 }
 
-window.onkeyup = function(event) {
+window.onkeyup = function (event) {
   if (event.keyCode === SPACE) {
     state.SPACE_PRESSED = false
   }
+}
+
+$('.board').addEventListener('touchstart', touch)
+$('.board').addEventListener('touchmove', touchMove)
+$('.board').addEventListener('touchend', handleSwipe)
+
+
+let touchstartX = 0;
+let touchstartY = 0;
+let touchendX = 0;
+let touchendY = 0;
+
+function touch(ev) {
+  touchstartX = ev.touches[0].screenX
+  touchstartY = ev.touches[0].screenY
+  console.log(ev.touches, ev.type);
+}
+function touchMove(ev) {
+  touchendX = ev.touches[0].screenX;
+  touchendY = ev.touches[0].screenY;
+  console.log(ev.touches, ev.type);
+}
+function handleSwipe() {
+  let diffX = Math.abs(touchstartX - touchendX)
+  let diffY = Math.abs(touchstartY - touchendY)
+
+  if (touchendX <= touchstartX && diffX > diffY ) {
+    changeDirection(LEFT);
+  }
+
+  if (touchendX >= touchstartX && diffX > diffY) {
+    changeDirection(RIGHT);
+  }
+
+  if (touchendY <= touchstartY && diffY > diffX) {
+    changeDirection(UP);
+  }
+
+  if (touchendY >= touchstartY && diffY > diffX) {
+    changeDirection(DOWN);
+  }
+
 }
