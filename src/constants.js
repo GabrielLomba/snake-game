@@ -7,3 +7,5 @@ export const BLOCK_PX_SIZE = 30
 export const GAME_ITERATION_MILLISSECONDS = 150
 export const MAX_SCORE_ENTRIES = 5
 export const $ = (sel) => document.querySelector(sel)
+export const WIN_MESSAGE = 'Congratulations!'
+export const LOSE_MESSAGE = 'Oops! You lost.'

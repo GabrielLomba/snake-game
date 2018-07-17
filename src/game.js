@@ -3,13 +3,14 @@ import state from './store.js'
 import { updateSnake, resetSnake } from './snake.js'
 import { generateRandomFood } from './food.js'
 import { incrementScore, resetScore, createScoreEntry, resetUsernameInput } from './score.js'
-import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN, RIGHT, UP } from './constants.js'
+import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN, RIGHT, UP, LOSE_MESSAGE, WIN_MESSAGE } from './constants.js'
 
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
 const highestScoresBox = $('.highest-scores-box');
 const submitScoreBtn = $('#submitScoreBtn');
 const playAgainBox = $('.play-again-box')
+const messageEl = $('.message')
 const playAgainBtns = document.querySelectorAll('.again');
 
 function hideCover() {
@@ -79,10 +80,17 @@ function updateGameState() {
       updateSnake()
       if (!state.FOOD_POSITION) {
         incrementScore()
-        generateRandomFood()
+
+        if(state.SNAKE_BODY.length === state.BOARD_ROWS * state.BOARD_COLS) {
+          messageEl.innerText = WIN_MESSAGE
+          showPlayAgain()
+        } else {
+          generateRandomFood()
+        }
       }
     } catch (err) {
       state.GAME_HAS_STARTED = false
+      messageEl.innerText = LOSE_MESSAGE
       showPlayAgain()
     }
   }
