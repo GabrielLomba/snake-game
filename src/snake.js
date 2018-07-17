@@ -4,6 +4,7 @@ import state from './store.js'
 
 const board = document.querySelector('.board');
 let bodyElements = [document.querySelector('.snake-head')]
+var justAte= false;
 placeBlockInBoard(bodyElements[0], state.SNAKE_BODY[0])
 
 export function updateSnake() {
@@ -17,9 +18,11 @@ export function updateSnake() {
 
 const checkIfHasEatenFood = () => {
   if (isEqualPos(state.SNAKE_BODY[0])(state.FOOD_POSITION)) {
-    state.FOOD_UPDATES.push(state.FOOD_POSITION)
+    state.FOOD_UPDATES.push(state.FOOD_POSITION);
     state.FOOD_POSITION = null;
-    document.getElementById('bite').play()
+    if(state.SOUND){
+      document.getElementById('bite').play()
+    }
   }
 }
 

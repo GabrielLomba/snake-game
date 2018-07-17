@@ -7,6 +7,8 @@ import { $, GAME_ITERATION_MILLISSECONDS, SPACE, LEFT, DOWN, RIGHT, UP, LOSE_MES
 
 const cover = $('.cover');
 const startButton = $('#startGameBtn');
+const soundButton = $('.soundBtn');
+const soundImg = $('#sound');
 const highestScoresBox = $('.highest-scores-box');
 const submitScoreBtn = $('#submitScoreBtn');
 const playAgainBox = $('.play-again-box')
@@ -26,7 +28,9 @@ function showPlayAgain() {
   playAgainBox.style.display = 'grid';
   showChildren(playAgainBox);
   document.getElementById('bg').pause()
-  document.getElementById('loss').play()
+  if(soundImg.getAttribute('src')=='./dist/images/sound.svg'){
+    document.getElementById('loss').play()
+  }
 }
 
 function hideCoverChildren() {
@@ -49,10 +53,25 @@ function startgame() {
   resetUsernameInput()
   state.GAME_HAS_STARTED = true
   state.WAITING_USER_INPUT = true
-  document.getElementById('bg').play()
-  document.getElementById('bg').loop = true;
-  document.getElementById('bg').volume = 0.2;
+  if(soundImg.getAttribute('src')=='./dist/images/sound.svg'){
+    document.getElementById('bg').play()
+    document.getElementById('bg').loop = true;
+    document.getElementById('bg').volume = 0.2;
+  }
   return false;
+}
+
+function switchSound(){
+  switch (soundImg.getAttribute('src')) {
+    case './dist/images/sound.svg':
+      soundImg.src = './dist/images/nosound.svg';
+      state.SOUND = false;
+      break;
+    case './dist/images/nosound.svg':
+      soundImg.src = './dist/images/sound.svg';
+      state.SOUND = true;
+      break;
+  }
 }
 
 function showHighestScores() {
@@ -66,6 +85,8 @@ submitScoreBtn.addEventListener('click', function () {
   createScoreEntry()
   showHighestScores()
 })
+
+soundButton.addEventListener('click', switchSound);
 
 window.setInterval(() => {
   updateGameState()

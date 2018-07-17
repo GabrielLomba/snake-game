@@ -11,7 +11,8 @@ const state = {
   SNAKE_BODY: [ { x: 1, y: 1 } ],
   CURRENT_DIRECTION: null,
   FOOD_POSITION: { },
-  FOOD_UPDATES: []
+  FOOD_UPDATES: [],
+  SOUND: true
 }
 
 export default state

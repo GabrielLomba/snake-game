@@ -284,6 +284,22 @@ body, html {
   margin: 5px;
 }
 
+.soundBtn{
+  background: none;
+  border: 0px;
+  max-width: 46px;
+  position: absolute;
+  top: 7px;
+  right: 25px;
+  cursor: pointer;
+}
+.soundBtn:focus{
+  outline: none;
+}
+#sound{
+  width: 100%;
+}
+
 @media screen and (max-width: 1000px) {
   .title{
     font-size: 6vw;
@@ -316,5 +332,5 @@ body, html {
   .start-box{
     padding-bottom: 1em;
   }
-  
+
 }
