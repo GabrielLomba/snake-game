@@ -31,6 +31,7 @@ body, html {
   height: 100%;
   width: 100%;
   position: relative;
+  touch-action: none;
 }
 
 .snake-block {
@@ -92,7 +93,7 @@ body, html {
   height: 100vh;
   top: 0;
   left: 0;
-  background: #00000066;
+  background: rgba(0, 0, 0, 0.4);
   z-index: 500;
 }
 
@@ -251,9 +252,6 @@ body, html {
   grid-area: title;
   font-size: 60px;
   color: #f2f2f0;
-}
-.fs-30{
-  font-size: 30px;
   letter-spacing: 2px;
 }
 
@@ -287,6 +285,9 @@ body, html {
 }
 
 @media screen and (max-width: 1000px) {
+  .title{
+    font-size: 6vw;
+  }
   .play-again-box{
       width: 60%;
   }
@@ -297,6 +298,12 @@ body, html {
 }
 
 @media screen and (max-width: 600px) {
+  .top p{
+    display: none;
+  }
+  .title {
+    font-size: 30px;
+  }
   .play-again-box{
       width: 95%;
       padding: 0;
@@ -306,4 +313,8 @@ body, html {
       width: 95%;
       padding: 0;
   }
+  .start-box{
+    padding-bottom: 1em;
+  }
+  
 }
