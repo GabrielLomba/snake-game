@@ -17,9 +17,16 @@
   <audio id="bg" src="./src/sfx/bg2.mp3"></audio>
   <div id="container">
     <div class="top"><p class="m-0">press <span id="tip">spacebar</span> to speed up the game</p><h2 id="score">Score: <span id="points">0</span></h2></div>
+
     <div class="board">
       <div class="snake-head"></div>
       <div class="snake-food" id="food"></div>
+      <div class="mobile-controls">
+          <div class="btn-up"><img src="dist/images/Arrow.svg" alt="arrow up"></div>
+          <div class="btn-down"><img src="dist/images/Arrow.svg" alt="arrow down"></div>
+          <div class="btn-left"><img src="dist/images/Arrow.svg" alt="arrow left"></div>
+          <div class="btn-right"><img src="dist/images/Arrow.svg" alt="arrow right"></div>
+        </div>
     </div>
 
     <div class="cover">
@@ -29,6 +36,7 @@
         <button class="highest-scores" id="submitScoreBtn">Submit score</button>
         <button class="again">Play Again</button>
       </div>
+      
       <div class="highest-scores-box">
         <h1 class="title">Highest Scores</h1>
         <div class="score-entries"></div>
@@ -40,6 +48,9 @@
           <button type="button" name="soundBtn" class="soundBtn"><img src="./dist/images/sound.svg" alt="" id="sound"></button>
       </div>
     </div>
+
+    
+    
   </div>
   <script src="./dist/main.js"></script>
 </body>
