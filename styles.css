@@ -283,7 +283,6 @@ body, html {
 .m-5{
   margin: 5px;
 }
-
 .soundBtn{
   background: none;
   border: 0px;
@@ -298,6 +297,9 @@ body, html {
 }
 #sound{
   width: 100%;
+}
+.mobile-controls{
+  display: none;
 }
 
 @media screen and (max-width: 1000px) {
@@ -331,6 +333,37 @@ body, html {
   }
   .start-box{
     padding-bottom: 1em;
+  }
+  .mobile-controls{
+    display: grid;
+    width: 45vw;
+    height: 30vw;
+    position: absolute;
+    bottom: 15px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    grid-template-areas: ". arrUp ."
+                          "arrLeft arrDown arrRight";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    opacity: 0.2;
+    z-index: 1;
+  }
+  .btn-up{
+    grid-area: arrUp
+  }
+  .btn-down{grid-area: arrDown;
+    transform-origin: center;
+    transform: rotate(180deg)
+  }
+  .btn-left{grid-area: arrLeft;
+    transform-origin: center;
+    transform: rotate(-90deg)
+  }
+  .btn-right{grid-area: arrRight;
+    transform-origin: center;
+    transform: rotate(90deg)
   }
 
 }
