@@ -28,7 +28,7 @@ function showPlayAgain() {
   playAgainBox.style.display = 'grid';
   showChildren(playAgainBox);
   document.getElementById('bg').pause()
-  if(soundImg.getAttribute('src')=='./dist/images/sound.svg'){
+  if (soundImg.getAttribute('src') == './dist/images/sound.svg') {
     document.getElementById('loss').play()
   }
 }
@@ -53,7 +53,7 @@ function startgame() {
   resetUsernameInput()
   state.GAME_HAS_STARTED = true
   state.WAITING_USER_INPUT = true
-  if(soundImg.getAttribute('src')=='./dist/images/sound.svg'){
+  if (soundImg.getAttribute('src') == './dist/images/sound.svg') {
     document.getElementById('bg').play()
     document.getElementById('bg').loop = true;
     document.getElementById('bg').volume = 0.2;
@@ -61,7 +61,7 @@ function startgame() {
   return false;
 }
 
-function switchSound(){
+function switchSound() {
   switch (soundImg.getAttribute('src')) {
     case './dist/images/sound.svg':
       soundImg.src = './dist/images/nosound.svg';
@@ -102,7 +102,7 @@ function updateGameState() {
       if (!state.FOOD_POSITION) {
         incrementScore()
 
-        if(state.SNAKE_BODY.length === state.BOARD_ROWS * state.BOARD_COLS) {
+        if (state.SNAKE_BODY.length === state.BOARD_ROWS * state.BOARD_COLS) {
           messageEl.innerText = WIN_MESSAGE
           showPlayAgain()
         } else {
@@ -148,17 +148,32 @@ window.onkeyup = function (event) {
     state.SPACE_PRESSED = false
   }
 }
+          //Arrow Buttons
+// const moveUP= changeDirection(UP)
+// const arrowUp = $('.btn-up')
+// const arrowDown = $('.btn-down')
+// const arrowLeft = $('.btn-left')
+// const arrowRight = $('.btn-right')
 
-$('.board').addEventListener('touchstart', touch)
-$('.board').addEventListener('touchmove', touchMove)
-$('.board').addEventListener('touchend', handleSwipe)
+// arrowUp.addEventListener('click', changeDirection(UP))
+// arrowDown.addEventListener('click', changeDirection(DOWN))
+// arrowLeft.addEventListener('click', changeDirection(LEFT))
+// arrowRight.addEventListener('click', changeDirection(RIGHT))
+
+
+            //swipe
+$('#container').addEventListener('touchstart', touch, {passive: false})
+$('#container').addEventListener('touchmove', touchMove, {passive: false})
+// $('#container').addEventListener('touchend', handleSwipe, {passive: false})
 
 
 let touchstartX = 0;
 let touchstartY = 0;
 let touchendX = 0;
 let touchendY = 0;
-
+let threshold = 40;
+let diffX = 0;
+let diffY = 0;
 function touch(ev) {
   ev.preventDefault()
   touchstartX = ev.touches[0].screenX
@@ -166,12 +181,24 @@ function touch(ev) {
 }
 function touchMove(ev) {
   ev.preventDefault()
+  diffX = Math.abs(touchstartX - touchendX)
+  diffY = Math.abs(touchstartY - touchendY)
   touchendX = ev.touches[0].screenX;
   touchendY = ev.touches[0].screenY;
+  console.log(diffX,diffY,threshold);
+  if(diffX>=threshold){
+    handleSwipe()
+    touchstartX = ev.touches[0].screenX
+    touchstartY = ev.touches[0].screenY
+  } 
+  if(diffY>=threshold){
+    handleSwipe()
+    touchstartX = ev.touches[0].screenX
+    touchstartY = ev.touches[0].screenY} 
 }
 function handleSwipe() {
-  let diffX = Math.abs(touchstartX - touchendX)
-  let diffY = Math.abs(touchstartY - touchendY)
+  diffX = Math.abs(touchstartX - touchendX)
+  diffY = Math.abs(touchstartY - touchendY)
 
   if (touchendX <= touchstartX && diffX > diffY ) {
     changeDirection(LEFT);
