@@ -63,3 +63,10 @@ export function getScoreElementHeight() {
   const scoreStyle = window.getComputedStyle(scorePointsEl.parentElement)
   return parseInt(scoreStyle.height)
 }
+const clickSumbit = (ev) =>{
+  ev.preventDefault();
+  if (ev.keyCode === 13) {
+    $('#submitScoreBtn').click();
+  }
+}
+usernameInput.addEventListener("keyup", clickSumbit)
