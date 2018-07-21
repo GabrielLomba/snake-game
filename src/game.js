@@ -185,7 +185,6 @@ function touchMove(ev) {
   diffY = Math.abs(touchstartY - touchendY)
   touchendX = ev.touches[0].screenX;
   touchendY = ev.touches[0].screenY;
-  console.log(diffX,diffY,threshold);
   if(diffX>=threshold){
     handleSwipe()
     touchstartX = ev.touches[0].screenX
